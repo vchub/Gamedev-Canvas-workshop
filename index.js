@@ -6,7 +6,7 @@ const X = canvas.width;
 const Y = canvas.height;
 var x = X / 2;
 var y = Y - 30;
-r = 10;
+r = 30;
 var dx = 2;
 var dy = -2;
 
@@ -20,14 +20,18 @@ function drawBall() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (x + r >= X || x - r <= 0) {
-    dx = -dx;
-  } else if (y + r >= Y || y - r <= 0) {
-    dy = -dy;
+  if (x + r > X || x - r < 0) {
+    dx = -dx
   }
+
+  if (y + r > Y || y - r < 0) {
+    dy = -dy
+  }
+
   drawBall();
   x += dx;
   y += dy;
+
 }
 
 setInterval(draw, 10);
