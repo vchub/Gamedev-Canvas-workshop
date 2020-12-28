@@ -1,3 +1,19 @@
+
+points: 1
+
+Отец сказал сыну:
+2 гада назад я был в 3 раза старше чем ты.
+Но через 14 лет я буду только 2 раза старше чем ты.
+Сколько лет отцу и сыну?
+
+--------------------
+
+
+
+
+
+
+
 Установить VS Code extension
 https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
 
