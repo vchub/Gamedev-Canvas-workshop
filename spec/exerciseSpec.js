@@ -23,9 +23,9 @@ describe('array comprehension', () => {
   /**
    * возведи каждый элемент в квадрат
    */
-  it('square array', () => {
+  xit('square array', () => {
     function square(xs) {
-      return xs.map(x => x ** 2);
+      return;
     }
 
     a = [1, 2, 3];
@@ -51,9 +51,9 @@ describe('array filter', () => {
   /**
    * Отфильтруй все четные
    */
-  it('firlter even', () => {
+  xit('firlter even', () => {
     function evens(xs) {
-      return xs.filter(x => x % 2 == 0);
+      return;
     }
 
     a = [1, 6, 2, 7, 5];
@@ -64,9 +64,9 @@ describe('array filter', () => {
   /**
    * Отфильтруй все делящиеся на определенные числа
    */
-  it('firlter div by numbers', () => {
+  xit('firlter div by numbers', () => {
     function divby(xs, p, q) {
-      return xs.filter(x => x % (p * q) == 0);
+      return;
     }
 
     a = [25, 15, 35, 30];

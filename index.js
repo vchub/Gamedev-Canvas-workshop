@@ -10,6 +10,32 @@ r = 30;
 var dx = 2;
 var dy = -2;
 
+/**
+ * Блок для управления клавишами
+ */
+var rightPressed = false;
+var leftPressed = false;
+
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
+
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = true;
+  } else if (e.keyCode == 37) {
+    leftPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = false;
+  } else if (e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
+// End Блок для управления клавишами
+
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -20,6 +46,8 @@ function drawBall() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBall();
+
   if (x + r > X || x - r < 0) {
     dx = -dx;
   }
@@ -28,7 +56,15 @@ function draw() {
     dy = -dy;
   }
 
-  drawBall();
+  // key pressed check block
+  if (rightPressed) {
+    console.log('rightPressed', rightPressed);
+  }
+  if (rightPressed) {
+    console.log('leftPressed', leftPressed);
+  }
+  // End key pressed check block
+
   x += dx;
   y += dy;
 }

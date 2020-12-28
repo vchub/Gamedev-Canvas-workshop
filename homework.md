@@ -11,7 +11,20 @@ points: 1
 --------------------
 
 
-Programming:
+Programming Exercise:
+
+file: spec/exerciseSpec.js
+
+line: 26
+line: 53
+line: 67
+
+points: 3
+
+
+--------------------
+
+Game:
 
 1. создать прямогольный объект (биту) и сделать так что-бы шар от него
 отскакивал при столкновении
