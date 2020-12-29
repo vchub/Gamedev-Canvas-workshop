@@ -6,9 +6,14 @@ const X = canvas.width;
 const Y = canvas.height;
 var x = X / 2;
 var y = Y - 30;
-r = 30;
+var r = 30;
 var dx = 2;
 var dy = -2;
+// block paddle
+var ph = 50
+var pw = 250
+var px = 100
+var py = Y - ph
 
 /**
  * Блок для управления клавишами
@@ -43,10 +48,21 @@ function drawBall() {
   ctx.fill();
   ctx.closePath();
 }
+function drawPadlle() {
+  h = 50
+  ctx.beginPath();
+  ctx.rect(px, py, pw, ph);
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  ctx.closePath();
+}
+
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPadlle()
   drawBall();
+
 
   if (x + r > X || x - r < 0) {
     dx = -dx;
@@ -55,6 +71,7 @@ function draw() {
   if (y + r > Y || y - r < 0) {
     dy = -dy;
   }
+  
 
   // key pressed check block
   if (rightPressed) {

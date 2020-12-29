@@ -6,8 +6,7 @@ describe('array comprehension', () => {
     function doubleIt(xs) {
       res = [];
       for (let i = 0; i < xs.length; i++) {
-        const x = xs[i];
-        res.push(x * 2);
+        res.push(xs[i] * 2);
       }
       return res;
     }
@@ -23,14 +22,19 @@ describe('array comprehension', () => {
   /**
    * возведи каждый элемент в квадрат
    */
-  xit('square array', () => {
+  it('square array', () => {
     function square(xs) {
-      return;
+      res = []
+      for (let i = 0; i < xs.length; i++) {
+        res.push(xs[i]**2)
+      }
+      return res;
     }
 
     a = [1, 2, 3];
     exp = [1, 4, 9];
     expect(square(a)).toEqual(exp);
+    expect(square([0,1,5,10])).toEqual([0,1,25,100]);
   });
 });
 
@@ -40,7 +44,14 @@ describe('array filter', () => {
    */
   it('check > 5', () => {
     function checkMore5(xs) {
-      return xs.filter(x => x > 5);
+      // return xs.filter(x => x > 5);
+      res = []
+      for (let i = 0; i < xs.length; i++) {
+        if (xs[i]>5) {
+          res.push(xs[i])
+        }
+      }
+      return res
     }
 
     a = [1, 6, 2, 7, 5];
