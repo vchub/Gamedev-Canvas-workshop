@@ -12,16 +12,26 @@ https://docs.microsoft.com/en-us/windows/nodejs/setup-on-windows
 
 The Setup-NVM-for-Windows installation wizard will walk you through the setup steps,
 
---------------------
+---
 
-* Install Node extension pack: https://marketplace.visualstudio.com/items?itemName=waderyan.nodejs-extension-pack
+- Install Node extension pack: https://marketplace.visualstudio.com/items?itemName=waderyan.nodejs-extension-pack
 
-* Install required modules:
+- Install required modules:
 
-				npm install
+      		npm install
 
-* Set up runners in launch.json
+- Set up runners in launch.json
 
-* Install run in node extension. Try how it runs selected code and files.
+- Install run in node extension. Try how it runs selected code and files.
 
-* Configure code actions on save: https://code.visualstudio.com/docs/languages/javascript#_code-actions-on-save
+- Configure code actions on save: https://code.visualstudio.com/docs/languages/javascript#_code-actions-on-save
+
+---
+
+### Shortcuts
+
+keyboard Shortcuts.
+{
+"key": "ctrl+c ctrl+c",
+"command": "workbench.action.terminal.runSelectedText"
+}
