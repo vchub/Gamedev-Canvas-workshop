@@ -1,17 +1,15 @@
-const { double } = require('./maps');
+const { double } = require("./maps");
+const assert = require("assert");
 
-// function double(xs) {
-//   let i = 0;
-//   res = [];
-//   while (i < xs.length) {
-//     res.push(xs[i] * 2);
-//     i++;
-//   }
-//   return res;
-// }
+// node built in assert
+describe("double", () => {
+  describe("two", () => {
+    it("sub", () => {
+      assert.strictEqual(1 - 1, 0, "0?");
+    });
+  });
 
-test('double', () => {
   // expect(double([1, 2])).toBe([2, 4]);
-  expect(double([1, 2])).toStrictEqual([2, 4]);
-  expect(double([1, 2])).toEqual([2, 4]);
+  // expect(double([1, 2])).toStrictEqual([2, 4]);
+  // expect(double([1, 2])).toEqual([2, 4]);
 });

@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>
-      Gamedev Canvas Workshop - lesson 1: create the Canvas and draw on it
-    </title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      canvas {
-        background: rgb(238, 238, 238);
-        display: block;
-        margin: 0 auto;
-      }
-    </style>
-    <script src="index.js" defer></script>
+    <title>Mocha</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="mocha.css" />
   </head>
   <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
-
-    <script></script>
+    <div id="mocha"></div>
+    <script src="mocha.js"></script>
+    <script>
+      mocha.setup('bdd');
+    </script>
+    <script src="tests.spec.js"></script>
+    <script>
+      mocha.run();
+    </script>
   </body>
 </html>
