@@ -1,11 +1,23 @@
+
+Задачи:
+
+Отец сказал сыну:
+2 гада назад я был в 3 раза старше чем ты.
+Но через 14 лет я буду только 2 раза старше чем ты.
+Сколько лет отцу и сыну?
+
+points: 1
+
+--------------------
+
 https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:sequences
 
 fromm: General sequences
-to: Unit Test
+to: 	Unit Test
 
 points: 2
 
----
+--------------------
 
 https://www.yaklass.ru/p/algebra/10-klass/proizvodnaia-9147/cumma-beskonechnoi-geometricheskoi-progressii-11036
 
@@ -15,46 +27,30 @@ problems: 1-4
 
 points: 2
 
----
-
-Programming:
-
-### set up Node.js
-
-Instructions:
-https://docs.microsoft.com/en-us/windows/nodejs/setup-on-windows
-
-1. Open the windows-nvm repository in your internet browser and select the Download Now link.
-   https://github.com/coreybutler/nvm-windows/releases
-
-2. Download the nvm-setup.zip file for the most recent release.
-
-3. Once downloaded, open the zip file, then open the nvm-setup.exe file.
-
-The Setup-NVM-for-Windows installation wizard will walk you through the setup steps,
-
----
+--------------------
 
 Programming Exercise:
 
 file: spec/exerciseSpec.js
 
+line: 26
 line: 53
 line: 67
 
-points: 1
+points: 2
 
----
+
+--------------------
 
 Game:
 
 1. создать прямогольный объект (биту) и сделать так что-бы шар от него
-   отскакивал при столкновении
+отскакивал при столкновении
 
 points: 1
 
 2. создать еще один шар и сделать так что-бы шары отскакивали
-   друг от друга при столкновении
+друг от друга при столкновении
 
 points: 2
 

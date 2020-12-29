@@ -1,8 +1,8 @@
-describe('array comprehension', () => {
+describe("array comprehension", () => {
   /**
    * Пример изменения каждого элемента
    */
-  it('double array', () => {
+  it("double array", () => {
     function doubleIt(xs) {
       res = [];
       for (let i = 0; i < xs.length; i++) {
@@ -16,14 +16,14 @@ describe('array comprehension', () => {
     exp = [2, 4, 6];
     expect(doubleIt(a)).toEqual(exp);
 
-    exp1 = a.map(x => x * 2);
+    exp1 = a.map((x) => x * 2);
     expect(doubleIt(a)).toEqual(exp1);
   });
 
   /**
    * возведи каждый элемент в квадрат
    */
-  xit('square array', () => {
+  xit("square array", () => {
     function square(xs) {
       return;
     }
@@ -34,13 +34,13 @@ describe('array comprehension', () => {
   });
 });
 
-describe('array filter', () => {
+describe("array filter", () => {
   /**
    * Пример проверки каждого элемента
    */
-  it('check > 5', () => {
+  it("check > 5", () => {
     function checkMore5(xs) {
-      return xs.filter(x => x > 5);
+      return xs.filter((x) => x > 5);
     }
 
     a = [1, 6, 2, 7, 5];
@@ -51,7 +51,7 @@ describe('array filter', () => {
   /**
    * Отфильтруй все четные
    */
-  xit('firlter even', () => {
+  xit("firlter even", () => {
     function evens(xs) {
       return;
     }
@@ -64,7 +64,7 @@ describe('array filter', () => {
   /**
    * Отфильтруй все делящиеся на определенные числа
    */
-  xit('firlter div by numbers', () => {
+  xit("firlter div by numbers", () => {
     function divby(xs, p, q) {
       return;
     }
