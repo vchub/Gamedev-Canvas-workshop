@@ -1,7 +1,43 @@
-# Learn how to build 2D HTML5 Breakout game with pure JavaScript
+### set up Node.js
 
-Visit **[breakout.enclavegames.com](http://breakout.enclavegames.com/)** page for the list of available lessons.
+Instructions:
+https://docs.microsoft.com/en-us/windows/nodejs/setup-on-windows
 
-![MDN Breakout gameplay](https://mdn.mozillademos.org/files/10383/mdn-breakout-gameplay.png)
+1. Open the windows-nvm repository in your internet browser and select the Download Now link.
+   https://github.com/coreybutler/nvm-windows/releases
 
-In this step-by-step tutorial we create a simple MDN Breakout game written entirely in pure JavaScript and rendered on HTML5 Canvas. Every step has editable, live samples available to play with so you can see what the intermediate stages should look like. You will learn the basics of using the Canvas element to implement fundamental game mechanics like rendering and moving images, collision detection, control machanisms, and winning and losing states.
+2. Download the nvm-setup.zip file for the most recent release.
+
+3. Once downloaded, open the zip file, then open the nvm-setup.exe file.
+
+The Setup-NVM-for-Windows installation wizard will walk you through the setup steps,
+
+---
+
+- Install Node extension pack: https://marketplace.visualstudio.com/items?itemName=waderyan.nodejs-extension-pack
+
+- Install required modules:
+
+      		npm install
+
+- Set up runners in launch.json
+
+- Install run in node extension. Try how it runs selected code and files.
+
+- Configure code actions on save: https://code.visualstudio.com/docs/languages/javascript#_code-actions-on-save
+
+- Install global:
+
+				jest
+				mocha
+				jasmine
+				webpack
+
+
+### Shortcuts
+
+keyboard Shortcuts.
+{
+"key": "ctrl+c ctrl+c",
+"command": "workbench.action.terminal.runSelectedText"
+}

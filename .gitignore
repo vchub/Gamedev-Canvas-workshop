@@ -1,4 +1,8 @@
 debug.log
 *.log
 *.zip
+node_module/
 package-lock*
+
+/* include */
+!.vscode
