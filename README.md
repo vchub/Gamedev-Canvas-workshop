@@ -26,7 +26,6 @@ The Setup-NVM-for-Windows installation wizard will walk you through the setup st
 
 - Configure code actions on save: https://code.visualstudio.com/docs/languages/javascript#_code-actions-on-save
 
-
 - Install global:
 
 				jest
@@ -34,7 +33,6 @@ The Setup-NVM-for-Windows installation wizard will walk you through the setup st
 				jasmine
 				webpack
 
----
 
 ### Shortcuts
 
