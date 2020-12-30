@@ -9,6 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
 }
