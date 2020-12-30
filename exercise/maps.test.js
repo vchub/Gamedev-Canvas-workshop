@@ -1,15 +1,25 @@
-const { double } = require("./maps");
-const assert = require("assert");
+const { double } = require('./maps');
+const assert = require('assert');
 
-// node built in assert
-describe("double", () => {
-  describe("two", () => {
-    it("sub", () => {
-      assert.strictEqual(1 - 1, 0, "0?");
+describe('array maps', () => {
+  describe('two', () => {
+    it('double array', () => {
+      a = [1, 2, 3];
+      exp = [2, 4, 6];
+      assert.deepEqual(double(a), exp);
+    });
+
+    /**
+     * возведи каждый элемент в квадрат
+     */
+    xit('square array', () => {
+      function square(xs) {
+        return;
+      }
+
+      a = [1, 2, 3];
+      exp = [1, 4, 9];
+      assert.deepEqual(square(a), exp);
     });
   });
-
-  // expect(double([1, 2])).toBe([2, 4]);
-  // expect(double([1, 2])).toStrictEqual([2, 4]);
-  // expect(double([1, 2])).toEqual([2, 4]);
 });
