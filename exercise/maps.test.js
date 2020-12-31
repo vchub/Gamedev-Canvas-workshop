@@ -23,9 +23,3 @@ describe('array maps', () => {
     });
   });
 });
-
-describe('some', () => {
-  it('some', () => {
-    assert.
-  });
-});
