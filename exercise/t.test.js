@@ -2,7 +2,8 @@
 if (typeof window === 'undefined') {
   var assert = require('chai').assert;
   myId = require('./t.js').myId;
-  segmentIntersect = require('../physics.js').segmentIntersect;
+  segmentIntersect = require('../src/physics.js').segmentIntersect;
+  ballRectCollide = require('../src/physics.js').ballRectCollide;
 } else {
   assert = chai.assert;
 }
@@ -46,3 +47,14 @@ describe('segmentIntersect', () => {
     assert.equal(got, false);
   });
 });
+
+describe('collision', () => {
+  let p = { x: 0, y: 3, w: 3, h: 3 };
+  xit('left', () => {
+    let b = { x: -1, y: -1, r: 3, dx: 2, dy: -2 };
+    let [dx, dy] = ballRectCollide(b, p);
+    assert.deepEqual([dx, dy], [-2, -2]);
+  });
+});
+
+//

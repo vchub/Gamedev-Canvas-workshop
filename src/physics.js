@@ -31,39 +31,44 @@ function segmentIntersect([a, b], [c, d]) {
  *
  * @param {x,y,r,dx,dy} ball object
  * @param {x,y,w,h} rect object
- * @return [dx, dy] speed of the ball
+ * @return {array} [dx, dy] speed of the ball
  */
 function ballRectCollide(ball, rect) {
   let { x, y, r, dx, dy } = ball;
   let p = rect;
   let f = segmentIntersect;
   // left side
-  if (f([[p.x, py], [p.x, py + p.h]], [[x + r - dx, y - dy], [x + r, y]])) {
+  if (f([[p.x, p.y], [p.x, p.y + p.h]], [[x + r, y], [x + r + dx, y + dy]])) {
     return -dx, dy;
   }
   // rigth side
   if (
-    f([[p.x + w, py], [p.x + w, py + p.h]], [[x - r - dx, y - dy], [x - r, y]])
+    f(
+      [[p.x + p.w, p.y], [p.x + p.w, p.y + p.h]],
+      [[x - r, y], [x - r + dx, y + dy]],
+    )
   ) {
     return -dx, dy;
   }
   // top
-  if (f([[p.x, py], [p.x + p.w, py]], [[x - dx, y + r - dy], [x, y + r]])) {
+  if (f([[p.x, p.y], [p.x + p.w, p.y]], [[x, y + r], [x + dx, y + r + dy]])) {
     return dx, -dy;
   }
   // bottom
   if (
     f(
-      [[p.x, py + p.h], [p.x + p.w, py + p.h]],
-      [[x - dx, y - r - dy], [x, y - r]],
+      [[p.x, p.y + p.h], [p.x + p.w, p.y + p.h]],
+      [[x, y - r], [x + dx, y - r + dy]],
     )
   ) {
     return dx, -dy;
   }
+  return [dx, dy];
 }
 
 if (typeof window === 'undefined') {
   exports.segmentIntersect = segmentIntersect;
+  exports.ballRectCollide = ballRectCollide;
 }
 
 // function segmentIntersect([[x1, y1], [x2, y2]], [[x3, y3], [x4, y4]]) {
