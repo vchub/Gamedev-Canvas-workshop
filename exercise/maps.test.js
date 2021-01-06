@@ -1,17 +1,25 @@
 const { double } = require('./maps');
+const assert = require('assert');
 
-// function double(xs) {
-//   let i = 0;
-//   res = [];
-//   while (i < xs.length) {
-//     res.push(xs[i] * 2);
-//     i++;
-//   }
-//   return res;
-// }
+describe('array maps', () => {
+  describe('two', () => {
+    it('double array', () => {
+      a = [1, 2, 3];
+      exp = [2, 4, 6];
+      assert.deepEqual(double(a), exp);
+    });
 
-test('double', () => {
-  // expect(double([1, 2])).toBe([2, 4]);
-  expect(double([1, 2])).toStrictEqual([2, 4]);
-  expect(double([1, 2])).toEqual([2, 4]);
+    /**
+     * возведи каждый элемент в квадрат
+     */
+    xit('square array', () => {
+      function square(xs) {
+        return;
+      }
+
+      a = [1, 2, 3];
+      exp = [1, 4, 9];
+      assert.deepEqual(square(a), exp);
+    });
+  });
 });

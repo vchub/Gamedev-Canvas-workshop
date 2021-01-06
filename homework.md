@@ -1,6 +1,7 @@
-https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:sequences
+https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/a/intro-to-inverse-functions?modal=1
 
-fromm: General sequences
+
+fromm: Intro to inverse functions
 to: Unit Test
 
 points: 2
@@ -11,52 +12,50 @@ https://www.yaklass.ru/p/algebra/10-klass/proizvodnaia-9147/cumma-beskonechnoi-g
 
 Theory
 
-problems: 1-4
+problems: 4-6
 
 points: 2
 
 ---
 
-Programming:
+javascript Exercises:
+https://www.jshero.net/en/success.html
 
-### set up Node.js
+problems: 1 - 17
 
-Instructions:
-https://docs.microsoft.com/en-us/windows/nodejs/setup-on-windows
-
-1. Open the windows-nvm repository in your internet browser and select the Download Now link.
-   https://github.com/coreybutler/nvm-windows/releases
-
-2. Download the nvm-setup.zip file for the most recent release.
-
-3. Once downloaded, open the zip file, then open the nvm-setup.exe file.
-
-The Setup-NVM-for-Windows installation wizard will walk you through the setup steps,
+points: 2
 
 ---
 
 Programming Exercise:
 
-file: spec/exerciseSpec.js
+file: ./exercise/maps.test.js
 
-line: 53
-line: 67
+line: 16
 
-points: 1
+
+file: ./exercise/filters.test.js
+
+тесты которые начинаются с xit
+
+line: 61
+line: 70
+line: 75
+
+points: 2
 
 ---
 
 Game:
 
-1. создать прямогольный объект (биту) и сделать так что-бы шар от него
-   отскакивал при столкновении
+1. шар отскакивает от всех сторон биты
 
 points: 1
 
 2. создать еще один шар и сделать так что-бы шары отскакивали
    друг от друга при столкновении
 
-points: 2
+points: 1
 
 3. управлять битой клавишами
 
