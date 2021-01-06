@@ -10,20 +10,7 @@
 			},
 			"problemMatcher": [],
 			"label": "npm: test",
-<<<<<<< HEAD
-			"detail": "jest"
-		},
-		{
-			"type": "vsls",
-			"taskUid": "npm:npm: test",
-			"problemMatcher": [
-				"$vsls"
-			],
-			"group": "test",
-			"label": "Shared: npm: test"
-=======
 			"detail": "mocha ./exercise/*.test.js"
->>>>>>> 6f99f784be319157148a7edb123435a8493c546a
 		}
 	]
 }

@@ -4,30 +4,10 @@ var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 const X = canvas.width;
 const Y = canvas.height;
-<<<<<<< HEAD:index.js
-
-// block paddle
-var ph = 30
-var pw = 150
-var px = X / 2 - pw / 2
-var py = Y - ph
-// var py = Y/3
-// end block paddle
-
-// block balls
-var r = ph / 2;
-// var x = X / 3;
-var x = X / 3
-var y = Y - ph - r - 1;
-
-var dx = 2;
-var dy = -2;
-// end block balls
-=======
 // ball
 var x = X / 2;
 var y = Y - 30;
-r = 10;
+r = 20;
 var dx = 2;
 var dy = -2;
 // paddle
@@ -37,7 +17,6 @@ var px = X / 4;
 // var py = Y - ph;
 var py = (Y * 2) / 3;
 var pzone = 2; // зона где происходит столкновение
->>>>>>> 6f99f784be319157148a7edb123435a8493c546a:src/index.js
 
 /**
  * Блок для управления клавишами
@@ -95,13 +74,8 @@ function draw() {
   drawBall();
   drawPaddle();
 
-<<<<<<< HEAD:index.js
-
-  // check world borders
-  if (x + r > X || x - r < 0) {
-=======
+  // world end collisions
   if (x + dx + r > X || x + dx - r < 0) {
->>>>>>> 6f99f784be319157148a7edb123435a8493c546a:src/index.js
     dx = -dx;
   }
 
