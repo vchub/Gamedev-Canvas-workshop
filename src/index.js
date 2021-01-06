@@ -7,7 +7,7 @@ const Y = canvas.height;
 // ball
 var x = X / 2;
 var y = Y - 30;
-r = 10;
+r = 20;
 var dx = 2;
 var dy = -2;
 // paddle
@@ -51,6 +51,14 @@ function drawBall() {
   ctx.fill();
   ctx.closePath();
 }
+function drawPadlle() {
+  ctx.beginPath();
+  ctx.rect(px, py, pw, ph);
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  ctx.closePath();
+}
+
 
 function drawPaddle() {
   ctx.beginPath();
@@ -62,9 +70,11 @@ function drawPaddle() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPadlle()
   drawBall();
   drawPaddle();
 
+  // world end collisions
   if (x + dx + r > X || x + dx - r < 0) {
     dx = -dx;
   }
@@ -94,6 +104,21 @@ function draw() {
   ) {
     dy = -dy;
   }
+  //проверка столкновения с платформой by y
+  if (x + r >= px && x - r <= px + pw && y + r >= py) {
+    dy = -dy
+  }
+  //try
+  // if (y + r >= py && y - r <= py + ph && x + r > px && x - r < px + pw) {
+  //   dx = -dx
+
+  // }
+
+  // if (x - r <= py + pw) {
+  //   dy = -dy
+
+  // }
+
 
   // key pressed check block
   if (rightPressed) {
