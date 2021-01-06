@@ -4,16 +4,24 @@ var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 const X = canvas.width;
 const Y = canvas.height;
-var x = X / 2;
-var y = Y - 30;
-var r = 30;
+
+// block paddle
+var ph = 30
+var pw = 150
+var px = X / 2 - pw / 2
+var py = Y - ph
+// var py = Y/3
+// end block paddle
+
+// block balls
+var r = ph / 2;
+// var x = X / 3;
+var x = X / 3
+var y = Y - ph - r - 1;
+
 var dx = 2;
 var dy = -2;
-// block paddle
-var ph = 50
-var pw = 250
-var px = 100
-var py = Y - ph
+// end block balls
 
 /**
  * Блок для управления клавишами
@@ -49,7 +57,6 @@ function drawBall() {
   ctx.closePath();
 }
 function drawPadlle() {
-  h = 50
   ctx.beginPath();
   ctx.rect(px, py, pw, ph);
   ctx.fillStyle = 'red';
@@ -64,6 +71,7 @@ function draw() {
   drawBall();
 
 
+  // check world borders
   if (x + r > X || x - r < 0) {
     dx = -dx;
   }
@@ -71,7 +79,21 @@ function draw() {
   if (y + r > Y || y - r < 0) {
     dy = -dy;
   }
-  
+  //проверка столкновения с платформой by y
+  if (x + r >= px && x - r <= px + pw && y + r >= py) {
+    dy = -dy
+  }
+  //try
+  // if (y + r >= py && y - r <= py + ph && x + r > px && x - r < px + pw) {
+  //   dx = -dx
+
+  // }
+
+  // if (x - r <= py + pw) {
+  //   dy = -dy
+
+  // }
+
 
   // key pressed check block
   if (rightPressed) {

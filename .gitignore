@@ -6,3 +6,4 @@ package-lock*
 
 /* include */
 !.vscode
+node_modules

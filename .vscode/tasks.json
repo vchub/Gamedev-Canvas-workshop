@@ -11,6 +11,15 @@
 			"problemMatcher": [],
 			"label": "npm: test",
 			"detail": "jest"
+		},
+		{
+			"type": "vsls",
+			"taskUid": "npm:npm: test",
+			"problemMatcher": [
+				"$vsls"
+			],
+			"group": "test",
+			"label": "Shared: npm: test"
 		}
 	]
 }
