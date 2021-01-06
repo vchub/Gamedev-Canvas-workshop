@@ -4,19 +4,83 @@ var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext('2d');
 const X = canvas.width;
 const Y = canvas.height;
-// ball
-var x = X / 2;
-var y = Y - 30;
-r = 20;
-var dx = 2;
-var dy = -2;
+
+// ball 1
+b1 = { x: 200, y: Y / 2, r: 20, dx: -2, dy: 2 };
+
+var pzone = 2; // зона где происходит столкновение
+
 // paddle
-var pw = 300;
+var pw = 200;
 var ph = 10;
-var px = X / 4;
+var px = X / 3;
 // var py = Y - ph;
 var py = (Y * 2) / 3;
-var pzone = 2; // зона где происходит столкновение
+
+function drawBall(b) {
+  ctx.beginPath();
+  ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+  ctx.fillStyle = '#0095DD';
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(px, py, pw, ph);
+  ctx.fillStyle = '#0095DD';
+  ctx.fill();
+  ctx.closePath();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPaddle();
+  drawBall(b1);
+
+  // world borders collisions
+  if (b1.x + b1.dx + b1.r > X || b1.x + b1.dx - b1.r < 0) {
+    b1.dx = -b1.dx;
+  }
+  if (b1.y + b1.dy + b1.r > Y || b1.y + b1.dy - b1.r < 0) {
+    b1.dy = -b1.dy;
+  }
+
+  // ball paddle collision
+  // top
+  if (
+    b1.x + b1.dx + b1.r > px &&
+    b1.x + b1.dx - b1.r < px + pw &&
+    b1.dy > 0 &&
+    b1.y + b1.dy + b1.r > py &&
+    b1.y + b1.dy + b1.r < py + pzone
+  ) {
+    b1.dy = -b1.dy;
+  }
+  // b1ottom
+  if (
+    b1.dy < 0 &&
+    b1.x + b1.dx + b1.r > px &&
+    b1.x + b1.dx - b1.r < px + pw &&
+    b1.y + b1.dy - b1.r < py + ph &&
+    b1.y + b1.dy + b1.r > py + ph - pzone
+  ) {
+    b1.dy = -b1.dy;
+  }
+
+  // move the b1
+  b1.x += b1.dx;
+  b1.y += b1.dy;
+
+  // key pressed check block
+  // if (rightPressed) {
+  //   console.log('rightPressed', rightPressed);
+  // }
+  // if (rightPressed) {
+  //   console.log('leftPressed', leftPressed);
+  // }
+  // End key pressed check block
+}
 
 /**
  * Блок для управления клавишами
@@ -44,98 +108,4 @@ function keyUpHandler(e) {
 }
 // End Блок для управления клавишами
 
-function drawBall() {
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, Math.PI * 2);
-  ctx.fillStyle = '#0095DD';
-  ctx.fill();
-  ctx.closePath();
-}
-function drawPadlle() {
-  ctx.beginPath();
-  ctx.rect(px, py, pw, ph);
-  ctx.fillStyle = 'red';
-  ctx.fill();
-  ctx.closePath();
-}
-
-
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(px, py, pw, ph);
-  ctx.fillStyle = '#0095DD';
-  ctx.fill();
-  ctx.closePath();
-}
-
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawPadlle()
-  drawBall();
-  drawPaddle();
-
-  // world end collisions
-  if (x + dx + r > X || x + dx - r < 0) {
-    dx = -dx;
-  }
-
-  if (y + dy + r > Y || y + dy - r < 0) {
-    dy = -dy;
-  }
-
-  // ball rectange collision
-  // top
-  if (
-    x + dx + r > px &&
-    x + dx - r < px + pw &&
-    dy > 0 &&
-    y + dy + r > py &&
-    y + dy + r < py + pzone
-  ) {
-    dy = -dy;
-  }
-  // bottom
-  if (
-    dy < 0 &&
-    x + dx + r > px &&
-    x + dx - r < px + pw &&
-    y + dy - r < py + ph &&
-    y + dy + r > py + ph - pzone
-  ) {
-    dy = -dy;
-  }
-  //проверка столкновения с платформой by y
-  if (x + r >= px && x - r <= px + pw && y + r >= py) {
-    dy = -dy
-  }
-  //try
-  // if (y + r >= py && y - r <= py + ph && x + r > px && x - r < px + pw) {
-  //   dx = -dx
-
-  // }
-
-  // if (x - r <= py + pw) {
-  //   dy = -dy
-
-  // }
-
-
-  // key pressed check block
-  if (rightPressed) {
-    console.log('rightPressed', rightPressed);
-  }
-  if (rightPressed) {
-    console.log('leftPressed', leftPressed);
-  }
-  // End key pressed check block
-
-  x += dx;
-  y += dy;
-}
-
 setInterval(draw, 10);
-
-// ball rectange collision
-// let p = { x: px, y: py, pw: 3, ph: 3 };
-// let b = { x: x, y: y, r: r, dx: dx, dy: dy };
-// [dx, dy] = ballRectCollide(b, p);
