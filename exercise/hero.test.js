@@ -1,12 +1,7 @@
-function greet() {
-    return 'Haydo!'
+function toCase(s) {
+    return s.toLowerCase() + "-" + s.toUpperCase()
 }
-var salutation = greet()
-salutation
 
+toCase('Mthatha')
 
-o = { x: 1, s: 'foo' }
-o.x
-o.s
-o.a = { x: 2, y: 3 }
-o
+toCase('Mthatha') === 'mthatha-MTHATHA'

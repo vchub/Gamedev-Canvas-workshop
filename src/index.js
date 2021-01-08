@@ -6,7 +6,9 @@ const X = canvas.width;
 const Y = canvas.height;
 
 // ball 1
-b1 = { x: 200, y: Y / 2, r: 20, dx: -2, dy: 2 };
+b1 = { x: 200, y: Y / 2, r: 50, dx: -2, dy: 2 };
+
+b2 = { x: 300, y: Y / 3, r: 50, dx: 2, dy: -2 };
 
 var pzone = 2; // зона где происходит столкновение
 
@@ -14,8 +16,8 @@ var pzone = 2; // зона где происходит столкновение
 var pw = 200;
 var ph = 10;
 var px = X / 3;
-// var py = Y - ph;
-var py = (Y * 2) / 3;
+var py = Y - ph;
+// var py = (Y * 2) / 3;
 
 function drawBall(b) {
   ctx.beginPath();
@@ -33,44 +35,66 @@ function drawPaddle() {
   ctx.closePath();
 }
 
+function borderCollisions(b) {
+  if (b.x + b.dx + b.r > X || b.x + b.dx - b.r < 0) {
+    b.dx = -b.dx;
+  }
+  if (b.y + b.dy + b.r > Y || b.y + b.dy - b.r < 0) {
+    b.dy = -b.dy;
+  }
+}
+function paddleCollisions(b) {
+  // top
+  if (
+    b.x + b.dx + b.r > px &&
+    b.x + b.dx - b.r < px + pw &&
+    b.dy > 0 &&
+    b.y + b.dy + b.r > py &&
+    b.y + b.dy + b.r < py + pzone
+  ) {
+    b.dy = -b.dy;
+  }
+  // bottom
+  if (
+    b.dy < 0 &&
+    b.x + b.dx + b.r > px &&
+    b.x + b.dx - b.r < px + pw &&
+    b.y + b.dy - b.r < py + ph &&
+    b.y + b.dy + b.r > py + ph - pzone
+  ) {
+    b.dy = -b.dy;
+  }
+}
+
+function moveBall(b) {
+  b.x += b.dx;
+  b.y += b.dy;
+}
+
+function ballsCollision(b1, b2) {
+  d = ((b1.x - b2.x) ** 2 + (b1.y - b2.y) ** 2) ** 0.5
+  if (d <= b1.r + b2.r) {
+    [b1.dx, b2.dx] = [b2.dx, b1.dx]
+    [b1.dy, b2.dy] = [b2.dy, b1.dy]
+  }
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawPaddle();
   drawBall(b1);
+  drawBall(b2);
 
   // world borders collisions
-  if (b1.x + b1.dx + b1.r > X || b1.x + b1.dx - b1.r < 0) {
-    b1.dx = -b1.dx;
-  }
-  if (b1.y + b1.dy + b1.r > Y || b1.y + b1.dy - b1.r < 0) {
-    b1.dy = -b1.dy;
-  }
+  borderCollisions(b1)
+  borderCollisions(b2)
 
   // ball paddle collision
-  // top
-  if (
-    b1.x + b1.dx + b1.r > px &&
-    b1.x + b1.dx - b1.r < px + pw &&
-    b1.dy > 0 &&
-    b1.y + b1.dy + b1.r > py &&
-    b1.y + b1.dy + b1.r < py + pzone
-  ) {
-    b1.dy = -b1.dy;
-  }
-  // b1ottom
-  if (
-    b1.dy < 0 &&
-    b1.x + b1.dx + b1.r > px &&
-    b1.x + b1.dx - b1.r < px + pw &&
-    b1.y + b1.dy - b1.r < py + ph &&
-    b1.y + b1.dy + b1.r > py + ph - pzone
-  ) {
-    b1.dy = -b1.dy;
-  }
+  paddleCollisions(b1)
+  paddleCollisions(b2)
 
-  // move the b1
-  b1.x += b1.dx;
-  b1.y += b1.dy;
+  // ball ball collision
+  ballsCollision(b1, b2)
 
   // key pressed check block
   // if (rightPressed) {
@@ -80,6 +104,12 @@ function draw() {
   //   console.log('leftPressed', leftPressed);
   // }
   // End key pressed check block
+
+
+  // move the b
+  moveBall(b1)
+  moveBall(b2)
+
 }
 
 /**
