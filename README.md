@@ -21,3 +21,13 @@ keyboard Shortcuts.
 	"key": "alt+c alt+c",
 	"command": "workbench.action.terminal.runSelectedText"
 	}
+
+### Tests
+
+run mocha in watch mode
+
+	mocha --watch "./exercise/*.test.js"
+
+Run Test task
+
+	Ctr-P, Tasks: Run Test Task
