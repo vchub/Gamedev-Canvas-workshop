@@ -9,6 +9,13 @@ if (typeof window === "undefined") {
 }
 
 describe("id", () => {
+  const myid = (x) => x;
+  it("const v = ()=>", () => {
+    assert.equal(1, myid(1));
+  });
+});
+
+describe("id", () => {
   it("local id", () => {
     assert.equal(1, 1);
     assert.deepEqual([1, 2], [1, 2]);
