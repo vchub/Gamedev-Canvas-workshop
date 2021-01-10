@@ -1,23 +1,23 @@
 ### Set up
 
+Install global:
+
+	npm i -g mocha webpack
+
 Install ES6 Mocha Snippets
 
 Test module is node built assert. Use it by:
 
-    const assert = require('assert')
+	const assert = require('assert')
 
 Configure code actions on save: https://code.visualstudio.com/docs/languages/javascript#_code-actions-on-save
 
-Install global:
-
-    mocha
-    webpack
 
 ### Shortcuts
 
 keyboard Shortcuts.
 
-    {
-    "key": "ctrl+c ctrl+c",
-    "command": "workbench.action.terminal.runSelectedText"
-    }
+	{
+	"key": "alt+c alt+c",
+	"command": "workbench.action.terminal.runSelectedText"
+	}

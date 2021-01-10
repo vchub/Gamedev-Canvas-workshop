@@ -1,7 +1,21 @@
-function toCase(s) {
-    return s.toLowerCase() + "-" + s.toUpperCase()
+var assert = require("chai").assert;
+
+// test example
+function id(x) {
+  return x;
 }
 
-toCase('Mthatha')
+describe("test example", () => {
+  it("id", () => {
+    assert.equal(id(1), 1);
+  });
+});
+// EDN test example
 
-toCase('Mthatha') === 'mthatha-MTHATHA'
+function toCase(s) {
+  return s.toLowerCase() + "-" + s.toUpperCase();
+}
+
+toCase("Mthatha");
+
+toCase("Mthatha") === "mthatha-MTHATHA";
