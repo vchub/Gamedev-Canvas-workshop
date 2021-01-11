@@ -1,6 +1,6 @@
 const { assert } = require('chai');
 
-describe('promise', () => {
+describe('promise ', () => {
   it('many then', () => {
     p = new Promise((resolve, reject) => {
       setTimeout(function() {
@@ -45,3 +45,43 @@ describe('promise', () => {
       });
   });
 });
+
+describe('async', () => {
+  it('basic', () => {
+    function promised(init) {
+      return new Promise((resolve, reject) => {
+        setTimeout(
+          init => {
+            // console.log('in promised');
+            resolve(init);
+          },
+          10,
+          init,
+        );
+      });
+    }
+
+    const p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // console.log('in p2');
+        resolve('foo');
+      }, 1);
+    });
+
+    async function aCall(init) {
+      // console.log('before', init);
+      got = await promised(init * 2);
+      assert.equal(4, got);
+      // console.log('after');
+      g2 = await p2;
+      assert.equal('foo', g2);
+    }
+    return aCall(2);
+  });
+});
+
+//
+//
+//
+//
+//
