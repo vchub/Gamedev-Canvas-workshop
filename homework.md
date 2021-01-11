@@ -12,16 +12,13 @@ points: 3.5
 https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/a/intro-to-inverse-functions?modal=1
 
 
-fromm: Quiz 5
-to: Unit Test
+Unit Test
 
 points: 2
 
 ---
 
 https://www.yaklass.ru/p/algebra/10-klass/proizvodnaia-9147/cumma-beskonechnoi-geometricheskoi-progressii-11036
-
-Theory
 
 problems: rest
 
