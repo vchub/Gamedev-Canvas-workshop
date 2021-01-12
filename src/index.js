@@ -6,9 +6,8 @@ const X = canvas.width;
 const Y = canvas.height;
 
 // ball 1
-b1 = { x: 200, y: Y / 2, r: 50, dx: -2, dy: 2 };
-
-b2 = { x: 300, y: Y / 3, r: 50, dx: 2, dy: -2 };
+b1 = { x: 200, y: Y / 2, r: 20, dx: -2, dy: 2 };
+b2 = { x: 300, y: Y / 3, r: 20, dx: 2, dy: -2 };
 
 var pzone = 2; // зона где происходит столкновение
 
@@ -16,8 +15,8 @@ var pzone = 2; // зона где происходит столкновение
 var pw = 200;
 var ph = 10;
 var px = X / 3;
-var py = Y - ph;
-// var py = (Y * 2) / 3;
+// var py = Y - ph;
+var py = (Y * 2) / 3;
 
 function drawBall(b) {
   ctx.beginPath();
@@ -72,10 +71,16 @@ function moveBall(b) {
 }
 
 function ballsCollision(b1, b2) {
-  d = ((b1.x - b2.x) ** 2 + (b1.y - b2.y) ** 2) ** 0.5
+  d = ((b1.x - b2.x) ** 2 + (b1.y - b2.y) ** 2) ** 0.5;
   if (d <= b1.r + b2.r) {
-    [b1.dx, b2.dx] = [b2.dx, b1.dx]
-    [b1.dy, b2.dy] = [b2.dy, b1.dy]
+    let t = b1.dx;
+    b1.dx = b2.dx;
+    b2.dx = t;
+    t = b1.dy;
+    b1.dy = b2.dy;
+    b2.dy = t;
+
+    // [b1.dx, b2.dx] = [b2.dx, b1.dx][(b1.dy, b2.dy)] = [b2.dy, b1.dy];
   }
 }
 
@@ -86,30 +91,27 @@ function draw() {
   drawBall(b2);
 
   // world borders collisions
-  borderCollisions(b1)
-  borderCollisions(b2)
+  borderCollisions(b1);
+  borderCollisions(b2);
 
   // ball paddle collision
-  paddleCollisions(b1)
-  paddleCollisions(b2)
+  paddleCollisions(b1);
+  paddleCollisions(b2);
 
   // ball ball collision
-  ballsCollision(b1, b2)
+  ballsCollision(b1, b2);
 
-  // key pressed check block
-  // if (rightPressed) {
-  //   console.log('rightPressed', rightPressed);
-  // }
-  // if (rightPressed) {
-  //   console.log('leftPressed', leftPressed);
-  // }
-  // End key pressed check block
+  // move the balls
+  moveBall(b1);
+  moveBall(b2);
 
-
-  // move the b
-  moveBall(b1)
-  moveBall(b2)
-
+  // move the paddle
+  if (rightPressed) {
+    console.log('rightPressed', rightPressed);
+  }
+  if (rightPressed) {
+    console.log('leftPressed', leftPressed);
+  }
 }
 
 /**
@@ -122,17 +124,17 @@ document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
 function keyDownHandler(e) {
-  if (e.keyCode == 39) {
+  if (e.key == 'Right' || e.key == 'ArrowRight') {
     rightPressed = true;
-  } else if (e.keyCode == 37) {
+  } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
     leftPressed = true;
   }
 }
 
 function keyUpHandler(e) {
-  if (e.keyCode == 39) {
+  if (e.key == 'Right' || e.key == 'ArrowRight') {
     rightPressed = false;
-  } else if (e.keyCode == 37) {
+  } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
     leftPressed = false;
   }
 }

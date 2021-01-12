@@ -1,22 +1,18 @@
+javascript:
 
-Я изменил структуру проекта - Шар, Бита.
-Перенес файлы index.html and index.js в папку src/
-
-так-же добавил в src/ файл 'src/balls.js'
-это примеры столкновения шаров с платформой и между собой.
-Можешь черпать в этих примерах вдохновение.
-
-
-Обязательно делай
 https://www.jshero.net/en/success.html
+
+problems: rest
+
+points: 3.5
+
 
 ---
 
 https://www.khanacademy.org/math/algebra/x2f8bb11595b61c86:functions/x2f8bb11595b61c86:inverse-functions-intro/a/intro-to-inverse-functions?modal=1
 
 
-fromm: Intro to inverse functions
-to: Unit Test
+Unit Test
 
 points: 2
 
@@ -24,20 +20,9 @@ points: 2
 
 https://www.yaklass.ru/p/algebra/10-klass/proizvodnaia-9147/cumma-beskonechnoi-geometricheskoi-progressii-11036
 
-Theory
+problems: rest
 
-problems: 4-6
-
-points: 2
-
----
-
-javascript Exercises:
-https://www.jshero.net/en/success.html
-
-problems: 3 - 25
-
-points: 2
+points: 2.5
 
 ---
 
