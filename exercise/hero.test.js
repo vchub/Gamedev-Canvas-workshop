@@ -89,8 +89,66 @@ function onesDigit2(n) {
 }
 
 
-// 114 = 1*100 + 1*10 + 4
-// 2*10 % 10
-// 3*1000 % 10
 
-Math.round()
+
+
+describe("add, nand, xor", () => {
+    it("add", () => {
+        assert.equal(6, add("1+5"))
+        assert.equal(106, add("100+6"))
+        assert.equal(7032, add("1032+6000"))
+        assert.equal(106, add("   100 + 6   "))
+    })
+    it("nand", () => {
+        assert.equal(false, nand(true, true))
+        assert.equal(true, nand(false, true))
+        assert.equal(true, nand(false, false))
+        assert.equal(true, nand(true, false))
+    })
+
+    it("xor", () => {
+        assert.equal(false, xor(true, true))
+        assert.equal(false, xor(false, false))
+        assert.equal(true, xor(false, true))
+        assert.equal(true, xor(true, false))
+    })
+
+})
+
+function xor(a, b) {
+    if ((a && b) || (!a && !b)) return false
+    return true
+}
+
+function add(s) {
+    var i = s.indexOf("+")
+    var a = s.substr(0, i)
+    var b = s.substr(i + 1)
+    return parseInt(a) + parseInt(b)
+}
+
+// !true == false
+// !false == true
+
+// if true return false
+// if false return true
+// (a && b)
+// !true
+// !false
+function nand(a, b) {
+    // if (a && b) return false
+    // return true
+    return !(a && b)
+}
+
+nand(true, false)
+nand(true, true)
+
+
+function nor(a, b) {
+    c = a || b
+    res = !c
+    return res
+}
+
+

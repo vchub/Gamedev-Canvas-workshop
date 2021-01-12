@@ -139,3 +139,5 @@ function keyUpHandler(e) {
 // End Блок для управления клавишами
 
 setInterval(draw, 10);
+
+
