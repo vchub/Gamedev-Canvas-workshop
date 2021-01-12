@@ -8,9 +8,9 @@ const Y = canvas.height;
 // balls
 var balls = [
   { x: 200, y: Y / 2, r: 20, dx: -2, dy: 2 },
-  { x: 240, y: Y / 2, r: 20, dx: -2, dy: 2 },
-  { x: 100, y: Y - 20, r: 20, dx: 2, dy: -2 },
-  { x: 50, y: Y - 120, r: 20, dx: 2, dy: -2 },
+  // { x: 240, y: Y / 3, r: 20, dx: 2, dy: -2 },
+  // { x: 100, y: Y - 50, r: 20, dx: 2, dy: -2 },
+  // { x: 50, y: Y - 120, r: 20, dx: 2, dy: -2 },
 ];
 
 var pzone = 2; // зона где происходит столкновение
@@ -27,24 +27,24 @@ var py = (Y * 2) / 3;
  */
 var rightPressed = false;
 var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
 
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
 function keyDownHandler(e) {
-  if (e.keyCode == 39) {
-    rightPressed = true;
-  } else if (e.keyCode == 37) {
-    leftPressed = true;
-  }
+  if (e.keyCode == 39) rightPressed = true;
+  if (e.keyCode == 37) leftPressed = true;
+  if (e.keyCode == 38) upPressed = true;
+  if (e.keyCode == 40) downPressed = true;
 }
 
 function keyUpHandler(e) {
-  if (e.keyCode == 39) {
-    rightPressed = false;
-  } else if (e.keyCode == 37) {
-    leftPressed = false;
-  }
+  if (e.keyCode == 39) rightPressed = false;
+  if (e.keyCode == 37) leftPressed = false;
+  if (e.keyCode == 38) upPressed = false;
+  if (e.keyCode == 40) downPressed = false;
 }
 // End Блок для управления клавишами
 
@@ -111,22 +111,34 @@ function checkBallBallCollide(b1, b2) {
   }
 }
 
+function checkGameOver(b) {
+  if (b.y + b.r >= Y) {
+    alert('GAME OVER');
+    document.location.reload();
+    clearInterval(interval);
+  }
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  len = balls.length;
-  for (var i = 0; i < len; i++) {
-    drawBall(balls[i]);
-  }
+  // len = balls.length;
+  // for (var i = 0; i < len; i++) {
+  //   drawBall(balls[i]);
+  // }
+  balls.forEach(drawBall);
 
   drawPaddle();
 
-  for (var i = 0; i < len; i++) {
-    checkBallBorders(balls[i]);
-  }
+  // for (var i = 0; i < len; i++) {
+  //   checkBallBorders(balls[i]);
+  // }
+  balls.forEach(checkBallBorders);
 
   // check collision with paddle
   balls.forEach(checkBallRect);
+
+  balls.forEach(checkGameOver);
 
   // check collision with each other
   for (var i = 0; i < len; i++) {
@@ -134,21 +146,12 @@ function draw() {
       checkBallBallCollide(balls[i], balls[j]);
     }
   }
-  // if (x + dx + r > X || x + dx - r < 0) {
-  //   dx = -dx;
-  // }
-
-  // if (y + dy + r > Y || y + dy - r < 0) {
-  //   dy = -dy;
-  // }
 
   // key pressed check block
-  if (rightPressed) {
-    console.log('rightPressed', rightPressed);
-  }
-  if (rightPressed) {
-    console.log('leftPressed', leftPressed);
-  }
+  if (rightPressed && px + pw < X - 7) px += 7;
+  if (leftPressed && px > 7) px -= 7;
+  if (upPressed && py > 7) py -= 7;
+  if (downPressed && py + ph < Y - 7) py += 7;
   // End key pressed check block
 
   for (var i = 0, len = balls.length; i < len; i++) {
@@ -157,9 +160,4 @@ function draw() {
   }
 }
 
-setInterval(draw, 10);
-
-// ball rectange collision
-// let p = { x: px, y: py, pw: 3, ph: 3 };
-// let b = { x: x, y: y, r: r, dx: dx, dy: dy };
-// [dx, dy] = ballRectCollide(b, p);
+const interval = setInterval(draw, 10);
