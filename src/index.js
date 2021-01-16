@@ -15,8 +15,8 @@ var pzone = 2; // зона где происходит столкновение
 var pw = 200;
 var ph = 10;
 var px = X / 3;
-// var py = Y - ph;
-var py = (Y * 2) / 3;
+var py = Y - ph;
+// var py = (Y * 2) / 3;
 
 function drawBall(b) {
   ctx.beginPath();
@@ -107,10 +107,10 @@ function draw() {
 
   // move the paddle
   if (rightPressed) {
-    console.log('rightPressed', rightPressed);
+    px = px + 5
   }
-  if (rightPressed) {
-    console.log('leftPressed', leftPressed);
+  if (leftPressed) {
+    px = px - 5
   }
 }
 
@@ -123,23 +123,36 @@ var leftPressed = false;
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
-function keyDownHandler(e) {
-  if (e.key == 'Right' || e.key == 'ArrowRight') {
-    rightPressed = true;
-  } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
-    leftPressed = true;
-  }
-}
+// function keyDownHandler(e) {
+//   if (e.key == 'Right' || e.key == 'ArrowRight') {
+//     rightPressed = true;
+//   } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
+//     leftPressed = true;
+//   }
+// }
 
-function keyUpHandler(e) {
-  if (e.key == 'Right' || e.key == 'ArrowRight') {
-    rightPressed = false;
-  } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
-    leftPressed = false;
-  }
-}
+// function keyUpHandler(e) {
+//   if (e.key == 'Right' || e.key == 'ArrowRight') {
+//     rightPressed = false;
+//   } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
+//     leftPressed = false;
+//   }
+// }
 // End Блок для управления клавишами
 
 setInterval(draw, 10);
 
+// new key Handler
+function keyDownHandler(e) {
+  if (e.keyCode == 39) rightPressed = true;
+  if (e.keyCode == 37) leftPressed = true;
+  if (e.keyCode == 38) upPressed = true;
+  if (e.keyCode == 40) downPressed = true;
+}
 
+function keyUpHandler(e) {
+  if (e.keyCode == 39) rightPressed = false;
+  if (e.keyCode == 37) leftPressed = false;
+  if (e.keyCode == 38) upPressed = false;
+  if (e.keyCode == 40) downPressed = false;
+}

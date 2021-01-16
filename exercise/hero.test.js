@@ -118,6 +118,15 @@ describe("add, nand, xor", () => {
 function xor(a, b) {
     if ((a && b) || (!a && !b)) return false
     return true
+
+
+
+
+
+
+
+
+
 }
 
 function add(s) {
@@ -151,4 +160,79 @@ function nor(a, b) {
     return res
 }
 
+
+describe("repdigit", () => {
+    it("repdigit 2d", () => {
+        assert.equal("Repdigit!", repdigit(11))
+        assert.equal("No Repdigit!", repdigit(12))
+        assert.equal("No Repdigit!", repdigit(73))
+        assert.equal("Repdigit!", repdigit(22))
+    })
+
+    it("repdigit nd", () => {
+        assert.equal("Repdigit!", repdigit(1))
+        assert.equal("Repdigit!", repdigit(11))
+        assert.equal("Repdigit!", repdigit(222))
+        assert.equal("Repdigit!", repdigit(2222222222222))
+
+        assert.equal("No Repdigit!", repdigit(73))
+        assert.equal("No Repdigit!", repdigit(222222222222221))
+    })
+})
+
+// 22 -> '22' -> true
+// 222 -> '222' -> true
+function repdigit(n) {
+    var s = n.toString()
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] !== s[0]) {
+            return "No Repdigit!"
+        }
+    }
+    return "Repdigit!"
+}
+
+// n = d*10 + o
+// n = h*100 + d*10 + o
+// function repdigit(n) {
+//     var a = n % 10
+//     var b = Math.round(n / 10)
+//     return a === b
+// }
+
+
+
+function rotate(xs) {
+    xs.push(xs.shift())
+}
+rotate([1, 2, 3])
+
+describe("array", () => {
+    it("concatUp", () => {
+        assert.deepEqual([], concatUp([], []))
+        assert.deepEqual([1], concatUp([1], []))
+        assert.deepEqual([1, 2], concatUp([1], [2]))
+        assert.deepEqual([1, 2, 3], concatUp([1], [2, 3]))
+        assert.deepEqual([1, 3, 2], concatUp([3, 2], [1]))
+    })
+
+    it("halve ", () => {
+        assert.deepEqual([], halve([]))
+        assert.deepEqual([1,2], halve([1, 2, 3]))
+        assert.deepEqual([1], halve([1,2]))
+
+    })
+})
+
+function halve(xs) {
+    var i = Math.round(xs.length/2)
+    return xs.slice(0,i)
+}
+
+
+function concatUp(xs, ys) {
+    if (xs.length < ys.length) return xs.concat(ys)
+    else if (xs.length > ys.length) return ys.concat(xs)
+    else return xs.concat(ys)
+}
 
