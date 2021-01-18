@@ -18,6 +18,29 @@ var px = X / 3;
 var py = Y - ph;
 // var py = (Y * 2) / 3;
 
+// bricks
+// const brick = { x: 20, y: 20, h: 20, w: 30, };
+const bricksNum = 5
+const bricks = []
+const brickWidth = X / bricksNum
+for (let i = 0; i < bricksNum; i++) {
+  bricks.push({ x: 10 + i * brickWidth, y: 20, h: 20, w: brickWidth - 20, })
+}
+
+function drawBrick(b) {
+  ctx.beginPath();
+  ctx.rect(b.x, b.y, b.w, b.h);
+  ctx.fillStyle = '#0095DD';
+  ctx.fill();
+  ctx.closePath();
+}
+
+function drawBricks(bs) {
+  for (let i = 0; i < bs.length; i++) {
+    drawBrick(bs[i])
+  }
+}
+
 function drawBall(b) {
   ctx.beginPath();
   ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
@@ -89,8 +112,8 @@ function draw() {
   drawPaddle();
   drawBall(b1);
   drawBall(b2);
+  drawBricks(bricks)
 
-  // world borders collisions
   borderCollisions(b1);
   borderCollisions(b2);
 
@@ -106,43 +129,36 @@ function draw() {
   moveBall(b2);
 
   // move the paddle
-  if (rightPressed) {
-    px = px + 5
+  if (rightPressed && px + pw < X) {
+    px = px + 1
   }
-  if (leftPressed) {
-    px = px - 5
+
+  if (leftPressed && px > 0) {
+    px = px - 1
+  }
+
+  if (upPressed && py > 0) {
+    py = py - 1
+  }
+
+  if (downPressed && py < Y - ph) {
+    py = py + 1
   }
 }
+
+setInterval(draw, 10);
 
 /**
  * Блок для управления клавишами
  */
 var rightPressed = false;
 var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
 
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
-// function keyDownHandler(e) {
-//   if (e.key == 'Right' || e.key == 'ArrowRight') {
-//     rightPressed = true;
-//   } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
-//     leftPressed = true;
-//   }
-// }
-
-// function keyUpHandler(e) {
-//   if (e.key == 'Right' || e.key == 'ArrowRight') {
-//     rightPressed = false;
-//   } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
-//     leftPressed = false;
-//   }
-// }
-// End Блок для управления клавишами
-
-setInterval(draw, 10);
-
-// new key Handler
 function keyDownHandler(e) {
   if (e.keyCode == 39) rightPressed = true;
   if (e.keyCode == 37) leftPressed = true;
@@ -156,3 +172,4 @@ function keyUpHandler(e) {
   if (e.keyCode == 38) upPressed = false;
   if (e.keyCode == 40) downPressed = false;
 }
+// End Блок для управления клавишами
