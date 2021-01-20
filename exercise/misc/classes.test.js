@@ -43,7 +43,11 @@ describe('class examples ', () => {
         this.y = y;
       }
       dist = () => (this.x ** 2 + this.y ** 2) ** 0.5;
+      dist_x() {
+        return this.x;
+      }
     }
+
     p = new Point(1, 2);
     assert.equal(p.x, 1);
     assert.equal(p.y, 2);
@@ -54,6 +58,7 @@ describe('class examples ', () => {
     assert.equal(p.y, 2);
     // console.log(p);
     assert.equal(p.dist(), 2);
+    assert.equal(p.dist_x(), 0);
   });
 
   it('get', () => {
