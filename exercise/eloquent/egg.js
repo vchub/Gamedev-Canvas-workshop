@@ -10,8 +10,13 @@
 // }
 
 const ENV = {
-  // def: (name, val) => (ENV[name] = val),
+  true: true,
+  false: false,
 };
+// add primitive function
+for (let op of ['+', '-', '*', '/', '==', '<', '>']) {
+  ENV[op] = Function('a, b', `return a ${op} b`);
+}
 
 const specialForms = Object.create(null);
 
@@ -40,7 +45,7 @@ function parseApply(exp, s) {
   if (s[0] != '(') return { exp: exp, rest: s };
 
   s = s.slice(1).trim();
-  args = [];
+  let args = [];
   while (s[0] !== ')') {
     let o = parseExpression(s);
     args.push(o.exp);
@@ -80,8 +85,18 @@ function evalExp(exp, env) {
     }
     throw new ReferenceError(`Undefined binding: ${exp.value}`);
   }
-  if (exp.operator.value in specialForms) {
-    return specialForms[exp.operator.value](exp.args, env);
+  if (exp.type === 'apply') {
+    let { operator, args } = exp;
+    if (operator.type === 'word' && operator.value in specialForms) {
+      return specialForms[exp.operator.value](args, env);
+    }
+    let op = evalExp(operator, env);
+    if (typeof op === 'function') {
+      let xs = args.map(x => evalExp(x, env));
+      return op(...xs);
+    } else {
+      throw new TypeError('Applying a non-function.');
+    }
   }
 }
 
@@ -104,10 +119,20 @@ specialForms.def = (args, env) => {
 };
 
 specialForms.if = (args, env) => {
-  if (evalExp(args[0], env)) {
+  if (args.length < 2 && args.length > 3) {
+    // if (args.length !== 3) {
+    throw new SyntaxError('Wrong number of args to if');
+  }
+
+  let cond = evalExp(args[0], env);
+  if (cond) {
     return evalExp(args[1], env);
   } else {
-    return evalExp(args[2], env);
+    let res;
+    if (2 in args) {
+      res = evalExp(args[2], env);
+    }
+    return res;
   }
 };
 

@@ -3,14 +3,26 @@ const { parse, evaluate } = require('./egg.js');
 
 describe('eval', () => {
   it('do, def', () => {
-    // assert.equal(2, evaluate(`do(1,2)`));
+    assert.equal(2, evaluate(`do(1,2)`));
     assert.equal(1, evaluate(`def(x,1)`));
     assert.equal(1, evaluate(`do( def(x,1), x)`));
   });
 
+  it('basic fun', () => {
+    assert.equal(1, evaluate(`+(1, 0)`));
+    assert.equal(2, evaluate(`*(1, 2)`));
+    assert.equal(true, evaluate(`<(1, 2)`));
+    assert.equal(false, evaluate(`>(1, 2)`));
+    assert.equal(false, evaluate(`<(3, 2)`));
+  });
+
   it('if', () => {
-    assert.equal(2, evaluate(`if( <(1,2), 2, 0)`));
-    // (if (< 1 2) 2 0)
+    assert.equal(true, evaluate(`if( true, true, false)`));
+    assert.equal(false, evaluate(`if( false, true, false)`));
+    assert.equal(3, evaluate(`if( <(1,2), 3, 0)`));
+    assert.equal(0, evaluate(`if( <(2,1), 3, 0)`));
+    assert.equal(3, evaluate(`if( <(0,1), 3)`));
+    assert.equal(undefined, evaluate(`if( >(0,1), 3)`));
   });
 
   it('eval value', () => {
