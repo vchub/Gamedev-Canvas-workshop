@@ -1,7 +1,23 @@
 const { assert } = require('chai');
-const { parse, ENV } = require('./egg.js');
+const { parse, evaluate } = require('./egg.js');
 
 describe('eval', () => {
+  it('do, def', () => {
+    // assert.equal(2, evaluate(`do(1,2)`));
+    assert.equal(1, evaluate(`def(x,1)`));
+    assert.equal(1, evaluate(`do( def(x,1), x)`));
+  });
+
+  it('if', () => {
+    assert.equal(2, evaluate(`if( <(1,2), 2, 0)`));
+    // (if (< 1 2) 2 0)
+  });
+
+  it('eval value', () => {
+    assert.equal('foo', evaluate(' "foo" '));
+    assert.equal(-1.1, evaluate('-1.1'));
+  });
+
   it('parse primitives', () => {
     // const s0 = 'define(x, 0)';
     assert.deepEqual({ type: 'value', value: 'xxx' }, parse(' "xxx"'));

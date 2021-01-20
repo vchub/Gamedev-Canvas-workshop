@@ -9,9 +9,11 @@
 //   ]
 // }
 
-ENV = {
-  def: (name, val) => (ENV[name] = val),
+const ENV = {
+  // def: (name, val) => (ENV[name] = val),
 };
+
+const specialForms = Object.create(null);
 
 // String -> {exp: ST, rest: String}
 function parseExpression(s) {
@@ -65,7 +67,61 @@ function parse(s) {
   return exp;
 }
 
+// Exp, Env -> Value
+function evalExp(exp, env) {
+  // console.log('exp', exp);
+  // console.log('value', exp.value, exp.value in specialForms);
+  if (exp.type === 'value') {
+    return exp.value;
+  }
+  if (exp.type === 'word') {
+    if (exp.value in env) {
+      return env[exp.value];
+    }
+    throw new ReferenceError(`Undefined binding: ${exp.value}`);
+  }
+  if (exp.operator.value in specialForms) {
+    return specialForms[exp.operator.value](exp.args, env);
+  }
+}
+
+// String -> Value
+function evaluate(s) {
+  let exp = parse(s);
+  return evalExp(exp, ENV);
+}
+
+specialForms.def = (args, env) => {
+  var k = args[0];
+  if (k.type === 'word') {
+    k = k.value;
+  } else {
+    k = evalExp(k, env);
+  }
+  const v = evalExp(args[1], env);
+  env[k] = v;
+  return v;
+};
+
+specialForms.if = (args, env) => {
+  if (evalExp(args[0], env)) {
+    return evalExp(args[1], env);
+  } else {
+    return evalExp(args[2], env);
+  }
+};
+
+specialForms.do = (args, env) => {
+  // console.log('do, args', args);
+  var res;
+  for (var i = 0, len = args.length; i < len; i++) {
+    res = evalExp(args[i], env);
+  }
+  return res;
+};
+
 module.exports = {
+  evaluate: evaluate,
   parse: parse,
   parseExpression: parseExpression,
   ENV: ENV,
