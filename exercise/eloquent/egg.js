@@ -17,9 +17,9 @@ const ENV = {
 for (let op of ['+', '-', '*', '/', '==', '<', '>']) {
   ENV[op] = Function('a, b', `return a ${op} b`);
 }
-ENV.print = value => {
-  console.log(value);
-  value;
+ENV.print = name => {
+  console.log(name);
+  name;
 };
 
 const specialForms = Object.create(null);
@@ -35,7 +35,7 @@ function parseExpression(s) {
     exp = { type: 'value', value: Number(match[0]) };
   } else if ((match = /^[^\s(),#"]+/.exec(s))) {
     // console.log(match);
-    exp = { type: 'word', value: match[0] };
+    exp = { type: 'word', name: match[0] };
   } else {
     throw new SyntaxError('Unexpected syntax: ' + s);
   }
@@ -84,15 +84,15 @@ function evalExp(exp, env) {
     return exp.value;
   }
   if (exp.type === 'word') {
-    if (exp.value in env) {
-      return env[exp.value];
+    if (exp.name in env) {
+      return env[exp.name];
     }
-    throw new ReferenceError(`Undefined binding: ${exp.value}`);
+    throw new ReferenceError(`Undefined binding: ${exp.name}`);
   }
   if (exp.type === 'apply') {
     let { operator, args } = exp;
-    if (operator.type === 'word' && operator.value in specialForms) {
-      return specialForms[exp.operator.value](args, env);
+    if (operator.type === 'word' && operator.name in specialForms) {
+      return specialForms[exp.operator.name](args, env);
     }
     let op = evalExp(operator, env);
     if (typeof op === 'function') {
@@ -113,7 +113,7 @@ function evaluate(s) {
 specialForms.def = (args, env) => {
   var k = args[0];
   if (k.type === 'word') {
-    k = k.value;
+    k = k.name;
   } else {
     k = evalExp(k, env);
   }

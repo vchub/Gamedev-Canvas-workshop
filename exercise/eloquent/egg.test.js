@@ -2,6 +2,14 @@ const { assert } = require('chai');
 const { parse, evaluate } = require('./egg.js');
 
 describe('eval', () => {
+  xit('function', () => {
+    assert.equal(
+      2,
+      evaluate(`do( def(addone, fun(x, +(x,1))),
+									addone(1))`),
+    );
+  });
+
   it('while', () => {
     assert.equal(
       6,
@@ -58,15 +66,15 @@ describe('eval', () => {
   it('parse word', () => {
     assert.throws(() => parse('#y'), SyntaxError);
     assert.throws(() => parse('#y'), /Unexpected/);
-    assert.deepEqual({ type: 'word', value: 'x' }, parse(' x '));
+    assert.deepEqual({ type: 'word', name: 'x' }, parse(' x '));
   });
 
   it('parse apply', () => {
     assert.deepEqual(
       {
         type: 'apply',
-        operator: { type: 'word', value: 'f' },
-        args: [{ type: 'value', value: 1 }, { type: 'word', value: 'x' }],
+        operator: { type: 'word', name: 'f' },
+        args: [{ type: 'value', value: 1 }, { type: 'word', name: 'x' }],
       },
       parse(' f ( 1 , x) '),
     );
