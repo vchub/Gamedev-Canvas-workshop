@@ -2,11 +2,18 @@ const { assert } = require('chai');
 const { parse, evaluate } = require('./egg.js');
 
 describe('eval', () => {
-  xit('function', () => {
+  it('function', () => {
     assert.equal(
       2,
       evaluate(`do( def(addone, fun(x, +(x,1))),
 									addone(1))`),
+    );
+    assert.equal(
+      24,
+      evaluate(`do(
+						def(fact, fun(n, if(<(n,2), 1, *(n, fact(-(n,1)))))),
+						fact(4))
+							`),
     );
   });
 

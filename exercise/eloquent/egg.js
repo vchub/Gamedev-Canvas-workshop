@@ -159,6 +159,30 @@ specialForms.while = (args, env) => {
   return false;
 };
 
+specialForms.fun = (args, env) => {
+  if (!args.length) {
+    throw new SyntaxError('Functions need a body');
+  }
+  let body = args[args.length - 1];
+  let params = args.slice(0, args.length - 1).map(x => {
+    if (x.type !== 'word') {
+      throw new SyntaxError('Parameters name has to be word', x);
+    }
+    return x.name;
+  });
+
+  return function() {
+    if (arguments.length != params.length) {
+      throw new TypeError('Wrong number of arguments');
+    }
+    let localEnv = Object.create(env);
+    for (var i = 0; i < params.length; i++) {
+      localEnv[params[i]] = arguments[i];
+    }
+    return evalExp(body, localEnv);
+  };
+};
+
 module.exports = {
   evaluate: evaluate,
   parse: parse,
