@@ -17,6 +17,10 @@ const ENV = {
 for (let op of ['+', '-', '*', '/', '==', '<', '>']) {
   ENV[op] = Function('a, b', `return a ${op} b`);
 }
+ENV.print = value => {
+  console.log(value);
+  value;
+};
 
 const specialForms = Object.create(null);
 
@@ -143,6 +147,16 @@ specialForms.do = (args, env) => {
     res = evalExp(args[i], env);
   }
   return res;
+};
+
+specialForms.while = (args, env) => {
+  if (args.length != 2) {
+    throw new SyntaxError('Wrong number of args to while');
+  }
+  while (evalExp(args[0], env)) {
+    evalExp(args[1], env);
+  }
+  return false;
 };
 
 module.exports = {

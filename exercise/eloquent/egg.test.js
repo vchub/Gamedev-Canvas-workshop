@@ -2,10 +2,28 @@ const { assert } = require('chai');
 const { parse, evaluate } = require('./egg.js');
 
 describe('eval', () => {
+  it('while', () => {
+    assert.equal(
+      6,
+      evaluate(`do(
+						def(i,0),
+						def(fact,1),
+					while(<(i,3),
+					do(
+					def(i, +(i,1)),
+					def(fact, *(fact,i)),
+					)
+					),
+					fact)`),
+    );
+  });
+
   it('do, def', () => {
     assert.equal(2, evaluate(`do(1,2)`));
     assert.equal(1, evaluate(`def(x,1)`));
     assert.equal(1, evaluate(`do( def(x,1), x)`));
+    assert.equal(false, evaluate(`do( <(2,1))`));
+    assert.equal(false, evaluate(`do( def(x,<(2,1)), x)`));
   });
 
   it('basic fun', () => {
