@@ -1,7 +1,7 @@
 var assert = require('chai').assert;
 
 describe('roman numbers', function() {
-  aR = {
+  arabicRoman = {
     1: 'I',
     2: 'II',
     3: 'III',
@@ -17,6 +17,11 @@ describe('roman numbers', function() {
     500: 'D',
     1000: 'M',
   };
+
+  romanArabic = Object.fromEntries(
+    Object.entries(arabicRoman).map(([k, v]) => [v, parseInt(k)]),
+  );
+  // console.log('romanArabic', romanArabic);
 
   // (int, String) -> String
   function toRomanUnit(n, one, five, ten) {
@@ -58,5 +63,50 @@ describe('roman numbers', function() {
     assert.equal('CLX', toRoman(160));
     assert.equal('CCVII', toRoman(207));
     assert.equal('MLXVI', toRoman(1066));
+  });
+
+  // (String) -> Number
+  function toArabic(s) {
+    let xs = Array.from(s);
+    let b = romanArabic[xs.pop()];
+    let res = b;
+    while (xs.length > 0) {
+      let a = romanArabic[xs.pop()];
+      if (a < b) {
+        res -= a;
+      } else {
+        res += a;
+      }
+      b = a;
+    }
+    return res;
+  }
+
+  it('roman -> arabic', () => {
+    assert.equal(1, toArabic('I'));
+    assert.equal(3, toArabic('III'));
+    assert.equal(4, toArabic('IV'));
+    assert.equal(8, toArabic('VIII'));
+    assert.equal(9, toArabic('IX'));
+    assert.equal(14, toArabic('XIV'));
+    assert.equal(39, toArabic('XXXIX'));
+    assert.equal(41, toArabic('XLI'));
+    assert.equal(160, toArabic('CLX'));
+    assert.equal(207, toArabic('CCVII'));
+    assert.equal(1066, toArabic('MLXVI'));
+  });
+
+  xit('Maps', () => {
+    let o = { a: 1, b: 2 };
+    console.log(o);
+    for (const k in o) {
+      console.log(k, o.k, o[k]);
+    }
+    let m = new Map(Object.entries(o));
+    // console.log('o.entries', O.entries, o.keys);
+    console.log('m', m);
+    for (const [k, v] of m) {
+      console.log(k, v);
+    }
   });
 });

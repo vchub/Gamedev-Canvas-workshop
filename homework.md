@@ -3,7 +3,7 @@ javascript:
 
 https://www.jshero.net/en/success.html
 
-problems: finish
+problems: Roman Numbers
 
 points: 3.5
 
@@ -31,11 +31,11 @@ points: 1
 ---
 Algebra:
 
-https://www.khanacademy.org/math/get-ready-for-algebra-ii/x6e4201668896ef07:get-ready-for-polynomial-operations-and-complex-numbers
+https://www.khanacademy.org/math/get-ready-for-algebra-ii/x6e4201668896ef07:get-ready-for-equations
 
-problems: finish
+problems: all
 
-points: 2
+points: 4.5
 
 
 ---
