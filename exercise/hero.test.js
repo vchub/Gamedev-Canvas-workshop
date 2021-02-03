@@ -494,7 +494,112 @@ describe("string , numbers", () => {
         assert.equal(12, parseFirstInt("hel12lo3"))
         assert.equal(12, parseFirstInt("12xxxx"))
     })
+    it("add", () => {
+        assert.equal(1, add("1"))
+        assert.equal(11, add("1+10"))
+        assert.equal(35, add("1+23+11"))
+    })
+
+    it("mean", () => {
+        // [Number] -> Number
+        function sum(xs) {
+            var y = 0
+            for (let i = 0; i < xs.length; i++) {
+                y = y + xs[i]
+            }
+            return y
+        }
+        // [Number] -> Number
+        function mean(xs) {
+            return sum(xs) / xs.length
+        }
+        assert.equal(1, mean([1]))
+        assert.equal(1.5, mean([1, 2]))
+        assert.equal(2.5, mean([1, 3, 5, 1]))
+    })
+    xit("reverse", () => {
+        assert.equal("h", reverse("h"))
+        assert.equal("ih", reverse("hi"))
+        assert.equal("oll eh", reverse("he llo"))
+    })
+    it("reverse Array", () => {
+        // [Object] -> [Object]
+        function reverse(xs) {
+            var ys = []
+            for (let i = xs.length - 1; i >= 0; i--) {
+                ys.push(xs[i])
+            }
+            return ys
+        }
+        assert.deepEqual([1], reverse([1]))
+        assert.deepEqual([2, 1], reverse([1, 2]))
+        assert.deepEqual([3, 4, 2, 1], reverse([1, 2, 4, 3]))
+    })
+
+    it("recurcive reverse Array", () => {
+        // reverse([]) = []
+        // reverse(xs) = last(xs) + reverse(xs.slice(0,last))
+        // reverse([1,2,3]) == [3] + reverse([1,2])
+        // [Object] -> [Object]
+        function reverse(xs) {
+            if (xs.length === 0) return xs
+            var l = xs[xs.length - 1]
+            var hs = xs.slice(0, xs.length - 1)
+            return [l].concat(reverse(hs))
+        }
+        assert.deepEqual([1], reverse([1]))
+        assert.deepEqual([2, 1], reverse([1, 2]))
+        assert.deepEqual([3, 4, 2, 1], reverse([1, 2, 4, 3]))
+    })
+    it("recurcive reverse str", () => {
+        //  str -> str
+        function reverse(s) {
+            if (s.length === 0) return s
+            var l = s[s.length - 1]
+            var hs = s.slice(0, s.length - 1)
+            return l + reverse(hs)
+        }
+        assert.deepEqual("h", reverse("h"))
+        assert.deepEqual("hi", reverse("ih"))
+    })
+
+    it("in place reverse Array", () => {
+        // [Object] -> undefind
+        function reverse(xs) {
+            var n = xs.length
+            for (let i = 0; i < n / 2; i++) {
+                var t = xs[i]
+                xs[i] = xs[n - 1 - i]
+                xs[n - 1 - i] = t
+            }
+        }
+        var xs = [1]
+        reverse(xs)
+        assert.deepEqual([1], xs)
+        xs = [1, 2]
+        reverse(xs)
+        assert.deepEqual([2, 1], xs)
+        xs = [1, 2, 3]
+        reverse(xs)
+        assert.deepEqual([3, 2, 1], xs)
+        xs = [1, 2, 4, 3]
+        reverse(xs)
+        assert.deepEqual([3, 4, 2, 1], xs)
+    })
 })
+
+
+
+
+// (String) -> Number
+function add(s) {
+    xs = s.split("+")
+    y = 0
+    for (let i = 0; i < xs.length; i++) {
+        y = y + parseFloat(xs[i])
+    }
+    return y
+}
 
 // (String) -> Number
 function parseFirstInt(s) {
@@ -656,5 +761,217 @@ function mean(xs) {
 // s = "some foo 10 foo"
 // s.split(" ")
 
+function arabic(s) {
+    var I = 1
+    var V = 5
+    var X = 10
+    var L = 50
+    var C = 100
+    var D = 500
+    var M = 1000
+    var ys = s.split("")
+    var n = 0
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (ys[i] === "I") {
+            if (i < s.length && (ys[i + 1] === "V" || ys[i + 1] === "X")) {
+                n = n - I
+            }
+            else {
+                n = n + I
+            }
+        }
+
+        if (ys[i] === "V") {
+            if (i < s.length && (ys[i + 1] === "L" || ys[i + 1] === "C" || ys[i + 1] === "D" || ys[i + 1] === "M")) {
+                n = n - V
+            }
+            else {
+                n = n + V
+            }
+        }
+        if (ys[i] === "X") {
+            if (i < s.length && (ys[i + 1] === "L" || ys[i + 1] === "C")) {
+                n = n - X
+            }
+            else {
+                n = n + X
+            }
+        }
+        if (ys[i] === "L") {
+            if (i < s.length && (ys[i + 1] === "D" || ys[i + 1] === "M")) {
+                n = n - L
+            }
+            else {
+                n = n + L
+            }
+        }
+        if (ys[i] === "C") {
+            if (i < s.length && (ys[i + 1] === "D" || ys[i + 1] === "M")) {
+                n = n - C
+            }
+            else {
+                n = n + C
+            }
+        }
+        if (ys[i] === "D") {
+            if (i < s.length && (ys[i + 1] === "M")) {
+                n = n - D
+            }
+            else {
+                n = n + D
+            }
+        }
+        if (ys[i] === "M") {
+            n = n + M
+        }
+
+    }
+    return n
+}
+
+describe("arabic", () => {
+    it("arabic", () => {
+        assert.deepEqual(1, arabic("I"))
+        assert.deepEqual(2, arabic("II"))
+        assert.deepEqual(3, arabic("III"))
+        assert.deepEqual(5, arabic("V"))
+        assert.deepEqual(4, arabic("IV"))
+        assert.deepEqual(6, arabic("VI"))
+        assert.deepEqual(7, arabic("VII"))
+        assert.deepEqual(8, arabic("VIII"))
+        assert.deepEqual(9, arabic("IX"))
+        assert.deepEqual(10, arabic("X"))
+        assert.deepEqual(11, arabic("XI"))
+        assert.deepEqual(24, arabic("XXIV"))
+        assert.deepEqual(29, arabic("XXIX"))
+        assert.deepEqual(39, arabic("XXXIX"))
+        assert.deepEqual(94, arabic("XCIV"))
+        assert.deepEqual(483, arabic("CDLXXXIII"))
+        assert.deepEqual(999, arabic("CMXCIX"))
+        assert.deepEqual(49, arabic("XLIX"))
+
+    })
+    it("repeat", () => {
+        assert.deepEqual("1", repeat("1", 1))
+        assert.deepEqual("22", repeat("2", 2))
+        assert.deepEqual("III", repeat("I", 3))
+    })
+
+    it("roman", () => {
+        assert.deepEqual("", roman(0))
+        assert.deepEqual("I", roman(1))
+        assert.deepEqual("II", roman(2))
+        assert.deepEqual("III", roman(3))
+        assert.deepEqual("IV", roman(4))
+        assert.deepEqual("V", roman(5))
+        assert.deepEqual("VI", roman(6))
+        assert.deepEqual("VII", roman(7))
+        assert.deepEqual("VIII", roman(8))
+        assert.deepEqual("IX", roman(9))
+    })
+    it("roman10++", () => {
+        assert.deepEqual("X", roman(10))
+        assert.deepEqual("XX", roman(20))
+        assert.deepEqual("LX", roman(60))
+
+
+        assert.deepEqual("XI", roman(11))
+        assert.deepEqual("XII", roman(12))
+        assert.deepEqual("XIII", roman(13))
+        assert.deepEqual("XIV", roman(14))
+        assert.deepEqual("XV", roman(15))
+        assert.deepEqual("XCIX", roman(99))
+    })
+    it("roman20++", () => {
+        assert.deepEqual("XXI", roman(21))
+        assert.deepEqual("XXII", roman(22))
+        assert.deepEqual("XXXIII", roman(33))
+        assert.deepEqual("XLIV", roman(44))
+        assert.deepEqual("LV", roman(55))
+    })
+    it("roman100++", () => {
+        assert.deepEqual("CXI", roman(111))
+        assert.deepEqual("CCXXIII", roman(223))
+        assert.deepEqual("DLXIV", roman(564))
+        assert.deepEqual("DCCXXXII", roman(732))
+        assert.deepEqual("CMXCV", roman(995))
+    })
+})
+
+// число n разложим на десятки и единицы 
+// переведём едицицы в римские 
+// переведём десятки в римские 
+// Number -> String
+function roman(n) {
+    var u = n % 10
+    var d = Math.floor(n / 10) % 10
+    var c = Math.floor(n / 100) % 10
+    var m = Math.floor(n / 1000) % 10
+    // var su = roman1(u)
+    // var sd = roman10(d)
+    // var sc = roman100(c)
+    // var sm = roman1000(m)
+    var su = romanG(u, 'I', 'V', 'X')
+    var sd = romanG(d, 'X', 'L', 'C')
+    var sc = romanG(c, 'C', 'D', 'M')
+    var sm = romanG(m, 'M')
+    return sm + sc + sd + su
+}
+// Number, String, String, String -> String
+function romanG(n, i, v, x) {
+    if (n < 4) return repeat(i, n)
+    if (n == 4) return i+v
+    if (n == 5) return v
+    if (n > 5 && n < 9) return v + repeat(i, n - 5)
+    if (n == 9) return i+x
+}
+
+// Number -> String
+function roman1(n) {
+    if (n < 4) return repeat("I", n)
+    if (n == 4) return "IV"
+    if (n == 5) return "V"
+    if (n > 5 && n < 9) return "V" + repeat("I", n - 5)
+    if (n == 9) return "IX"
+}
+// Number -> String
+function roman10(n) {
+    if (n < 4) return repeat("X", n)
+    if (n == 4) return "XL"
+    if (n == 5) return "L"
+    if (n > 5 && n < 9) return "L" + repeat("X", n - 5)
+    if (n == 9) return "XC"
+}
+// Number -> String
+function roman100(n) {
+    if (n < 4) return repeat("C", n)
+    if (n == 4) return "CD"
+    if (n == 5) return "D"
+    if (n > 5 && n < 9) return "D" + repeat("C", n - 5)
+    if (n == 9) return "CM"
+}
+// Number -> String
+function roman1000(n) {
+    if (n < 4) return repeat("M", n)
+}
+
+
+
+// 34
+// u = 4 
+// x = 3
+// f(u) -> IV
+// f(x) -> XXX
+// XXX + IV
+// f(u) + f(x)
+
+// String , Number -> String
+function repeat(s, n) {
+    s1 = ""
+    for (let i = 0; i < n; i++) {
+        s1 = s1 + s
+    }
+    return s1
+}
 
 
