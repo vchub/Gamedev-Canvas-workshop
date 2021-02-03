@@ -4,12 +4,10 @@ javascript:
 https://www.jshero.net/en/success.html
 
 problems: Roman Numbers
-
 				Сделать для чисел от 1 до 10
 
 				Разберись в алгоритме создания римских чисел - они создаты из I V X - по какому проавилу
 				(алгоритму)
-
 
 points: 3
 
@@ -48,6 +46,20 @@ points: 1
 
 points: 1
 
+<<<<<<< HEAD
+=======
+---
+Algebra:
+
+https://www.khanacademy.org/math/get-ready-for-algebra-ii/x6e4201668896ef07:get-ready-for-equations
+
+problems: all
+
+points: 4.5
+
+
+---
+>>>>>>> d4b2b4536ea6d1323c0e3d5d4e1aa97236d38cbf
 
 Programming Exercise:
 
