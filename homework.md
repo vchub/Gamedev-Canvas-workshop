@@ -1,40 +1,48 @@
 
+Calculus
+
+Прочитать теорию.  Обязательно.
+
+https://www.yaklass.ru/p/algebra/10-klass/proizvodnaia-9147/opredelenie-proizvodnoi-11223
+
+Теория
+
+theory: All
+problems: 3-5
+points: 2
+
+---
+Algebra:
+
+https://www.khanacademy.org/math/get-ready-for-algebra-ii/x6e4201668896ef07:get-ready-for-exponential-and-logarithmic-relationships
+
+problems
+	from:	Exponent properties
+	to:		Graphs of exponential growth
+
+points: 4
+
+
+---
 javascript:
 
 https://www.jshero.net/en/success.html
 
-problems: Roman Numbers
-				Сделать для чисел от 1 до 10
+problems: Сумма цифр в числе
 
-				Разберись в алгоритме создания римских чисел - они создаты из I V X - по какому проавилу
-				(алгоритму)
+points: 1
 
-points: 3
-
-
----
-
-Algebra:
-
-https://www.khanacademy.org/math/get-ready-for-algebra-ii/x6e4201668896ef07:get-ready-for-equations
-
-problems: Rest
-
-points: 2.5
-
+function digitSum(n) {
+  var acc = n % 10;
+  while (n >= 1) {
+    n = n / 10;
+    ???
+  }
+  return acc;
+}
 
 ---
-Calculus
 
-https://www.yaklass.ru/p/algebra/10-klass/proizvodnaia-9147/predel-funktcii-9149
-
-Теория обязательна
-
-theory: All
-problems: 1-4
-points: 2
-
----
 
 Game:
 
@@ -46,20 +54,6 @@ points: 1
 
 points: 1
 
-<<<<<<< HEAD
-=======
----
-Algebra:
-
-https://www.khanacademy.org/math/get-ready-for-algebra-ii/x6e4201668896ef07:get-ready-for-equations
-
-problems: all
-
-points: 4.5
-
-
----
->>>>>>> d4b2b4536ea6d1323c0e3d5d4e1aa97236d38cbf
 
 Programming Exercise:
 
